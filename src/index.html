@@ -14,6 +14,7 @@
 			</header>
 			<main>
 				<section>
+					<h2>Add Item</h2>
 					<form>
 						<div>
 							<label for="item-title">Title</label>
@@ -21,7 +22,9 @@
 						</div>
 						<div>
 							<label for="item-type">Type</label>
-							<input id="item-type" type="text" v-model="item.type">
+							<select id="item-type" v-model="item.type" options="types">
+								<option value="">Choose a type...</option>
+							</select>
 						</div>
 						<div>
 							<label for="item-system">System</label>
@@ -45,13 +48,13 @@
 							</tr>
 							<tr>
 								<th><input type="text" v-model="search.title" placeholder="Search Titles"></th>
-								<th></th>
+								<th><select id="item-type" v-model="search.type" options="types"><option value="">Filter by type...</option></select></th>
 								<th></th>
 								<th></th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-repeat="item in items | filterBy search.title in 'title'">
+							<tr v-repeat="item in items | filterBy search.title in 'title' | filterBy search.type in 'type'">
 								<td>{{item.title}}</td>
 								<td>{{item.type}}</td>
 								<td>{{item.system}}</td>

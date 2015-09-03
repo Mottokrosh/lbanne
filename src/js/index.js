@@ -33,19 +33,25 @@ var app = {
 				user: {},
 				item: { title: '', type: '', system: '' },
 				items: [],
+				types: [],
 				search: {
 					title: ''
 				}
 			},
 			ready: function () {
+				this.fetchTypes();
 				this.fetchItems();
 			},
 			methods: {
+				fetchTypes: function () {
+					var types = ['Book', 'Novella', 'Poem'];
+					this.$set('types', types);
+				},
 				fetchItems: function () {
 					var exampleItems = [
 						{
 							title: 'Merry Popper and the Strudle',
-							type: 'Novel',
+							type: 'Book',
 							system: 'N/A',
 							startLevel: 1,
 							endLevel: 10,
@@ -54,12 +60,20 @@ var app = {
 						},
 						{
 							title: 'Merry Popper Down And Under',
-							type: 'Novel',
+							type: 'Book',
 							system: 'N/A',
 							startLevel: 10,
 							endLevel: 15,
 							author: 'Jenny Brooks',
 							tags: ['feathers', 'tarts', 'sorbet']
+						},
+						{
+							title: 'Gulliver\'s Travels',
+							type: 'Novella'
+						},
+						{
+							title: 'Up, Down and Under',
+							type: 'Poem'
 						}
 					];
 					this.$set('items', exampleItems);

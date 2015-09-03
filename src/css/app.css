@@ -1,6 +1,13 @@
 @import url(https://fonts.googleapis.com/css?family=Bitter|Raleway);
 @import 'partials/reset.css';
 
+$dark: #3a2a23;
+$dark_alt: #976f4b;
+$light: rgba(240, 241, 232, 0.75);
+$action: #5c7b93;
+$action2: #7ea4b3;
+$action3: #b0d5db;
+
 body {
 	background-image: url(../img/blurred1.jpg);
 	background-repeat: no-repeat;
@@ -8,11 +15,11 @@ body {
 	background-position: center center;
 	font-size: 18px;
 	font-family: 'Bitter', serif;
-	color: #3a2a23;
+	color: $dark;
 }
 
 header {
-	background-color: #3a2a23;
+	background-color: $dark;
 	padding: 1rem;
 	text-align: center;
 }
@@ -20,7 +27,7 @@ header {
 section {
 	margin: 2rem auto;
 	padding: 2rem;
-	background-color: rgba(240, 241, 232, 0.75);
+	background-color: $light;
 	max-width: 960px;
 	border-radius: 0.5rem;
 }
@@ -28,28 +35,30 @@ section {
 h1, h2, h3, h4 {
 	font-family: 'Raleway', sans-serif;
 	font-weight: normal;
-	color: #976f4b;
+	color: $dark_alt;
 }
 
 a {
-	color: #5c7b93;
+	color: $action;
 
 	&:hover {
-		color: #7ea4b3;
+		color: $action2;
 	}
 
 	&:active {
-		color: #b0d5db;
+		color: $action3;
 	}
 }
 
 pre {
 	font-size: 0.7rem;
-	background-color: rgba(240, 241, 232, 0.75);
+	background-color: $light;
 	padding: 1rem;
 }
 
 table {
+	width: 100%;
+
 	th {
 		text-align: left;
 		padding: 0.5rem;
