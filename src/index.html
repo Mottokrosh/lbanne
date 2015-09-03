@@ -30,7 +30,7 @@
 						<div>
 							<button type="submit" v-on="click: addItem">Add Item</button>
 						</div>
-						<pre>{{item | json 2}}</pre>
+						<!-- <pre>{{item | json 2}}</pre> -->
 					</form>
 				</section>
 				<section>
@@ -43,9 +43,15 @@
 								<th>System</th>
 								<th>Actions</th>
 							</tr>
+							<tr>
+								<th><input type="text" v-model="search.title" placeholder="Search Titles"></th>
+								<th></th>
+								<th></th>
+								<th></th>
+							</tr>
 						</thead>
 						<tbody>
-							<tr v-repeat="item in items">
+							<tr v-repeat="item in items | filterBy search.title in 'title'">
 								<td>{{item.title}}</td>
 								<td>{{item.type}}</td>
 								<td>{{item.system}}</td>
@@ -54,9 +60,9 @@
 						</tbody>
 					</table>
 				</section>
-				<section>
+				<!-- <section>
 					<pre>{{items | json 2}}</pre>
-				</section>
+				</section> -->
 			</main>
 		</div>
 		<script type="text/javascript" src="cordova.js"></script>

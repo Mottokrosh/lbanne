@@ -1,5 +1,7 @@
 var Vue = require('vue');
 
+Vue.use(require('vue-resource'));
+
 var app = {
 	insideWebView: window.location.protocol === 'file:',
 
@@ -30,7 +32,10 @@ var app = {
 			data: {
 				user: {},
 				item: { title: '', type: '', system: '' },
-				items: []
+				items: [],
+				search: {
+					title: ''
+				}
 			},
 			ready: function () {
 				this.fetchItems();

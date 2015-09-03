@@ -30,6 +30,7 @@
     "precss": "^0.3.0",
     "vinyl-source-stream": "^1.1.0",
     "vue": "^0.12.12",
+    "vue-resource": "^0.1.15",
     "watchify": "^3.4.0"
   }
 }
