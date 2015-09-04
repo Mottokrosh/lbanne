@@ -70,10 +70,30 @@ table {
 	th {
 		text-align: left;
 		padding: 0.5rem;
+
+		input, select {
+			padding: 0.5rem;
+			height: 2rem;
+		}
+	}
+
+	thead tr:first-of-type {
+		th {
+			background-color: $dark;
+			color: $light;
+		}
 	}
 
 	td {
 		padding: 0.5rem;
+	}
+
+	tr:nth-of-type(odd) {
+		background-color: $light;
+	}
+
+	button {
+		padding: 0.5rem 1rem;
 	}
 }
 
