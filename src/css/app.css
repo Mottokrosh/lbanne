@@ -55,6 +55,7 @@ a {
 
 :focus {
 	outline: $focus auto 0.35rem;
+	outline-offset: 0.15rem;
 }
 
 pre {
@@ -116,5 +117,13 @@ button, [type="submit"] {
 	}
 }
 
+.fade-transition {
+	transition: all 300ms ease-in;
+	opacity: 1;
+}
+
+.fade-enter, .fade-leave {
+	opacity: 0;
+}
 
 

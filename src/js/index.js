@@ -35,12 +35,28 @@ var app = {
 				items: [],
 				types: [],
 				search: {
-					title: ''
-				}
+					title: '',
+					type: ''
+				},
+				currentView: 'test1'
 			},
 			ready: function () {
 				this.fetchTypes();
 				this.fetchItems();
+			},
+			components: {
+				test1: {
+					template: '<div><h1>Test One!</h1><p>{{foo}}</p></div>',
+					data: function () {
+						return { foo: 'bar' };
+					}
+				},
+				test2: {
+					template: '<div><h1>Test Two!</h1><p>{{foo}}</p></div>',
+					data: function () {
+						return { foo: 'another thing' };
+					}
+				}
 			},
 			methods: {
 				fetchTypes: function () {
@@ -89,6 +105,14 @@ var app = {
 					e.preventDefault();
 					if (confirm('Are you sure you want to remove this item?')) {
 						this.items.$remove(item);
+					}
+				},
+				toggleView: function (e) {
+					e.preventDefault();
+					if (this.currentView === 'test1') {
+						this.currentView = 'test2';
+					} else {
+						this.currentView = 'test1';
 					}
 				}
 			}

@@ -63,6 +63,12 @@
 						</tbody>
 					</table>
 				</section>
+				<section>
+					<div>
+						<button v-on="click: toggleView">Switch</button>
+					</div>
+					<component is="{{currentView}}" v-transition="fade" transition-mode="out-in"></component>
+				</section>
 				<!-- <section>
 					<pre>{{items | json 2}}</pre>
 				</section> -->
