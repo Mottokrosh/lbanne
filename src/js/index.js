@@ -33,7 +33,7 @@ var app = {
 				user: {},
 				item: { title: '', type: '', system: '' },
 				items: [],
-				types: [],
+				types: ['Adventure', 'Campaign Setting', 'Rulebook'],
 				search: {
 					title: '',
 					type: ''
@@ -41,7 +41,6 @@ var app = {
 				currentView: 'test1'
 			},
 			ready: function () {
-				this.fetchTypes();
 				this.fetchItems();
 			},
 			components: {
@@ -59,52 +58,32 @@ var app = {
 				}
 			},
 			methods: {
-				fetchTypes: function () {
-					var types = ['Book', 'Novella', 'Poem'];
-					this.$set('types', types);
-				},
 				fetchItems: function () {
-					var exampleItems = [
-						{
-							title: 'Merry Popper and the Strudle',
-							type: 'Book',
-							system: 'N/A',
-							startLevel: 1,
-							endLevel: 10,
-							author: 'Jenny Brooks',
-							tags: ['magic', 'unicorns']
-						},
-						{
-							title: 'Merry Popper Down And Under',
-							type: 'Book',
-							system: 'N/A',
-							startLevel: 10,
-							endLevel: 15,
-							author: 'Jenny Brooks',
-							tags: ['feathers', 'tarts', 'sorbet']
-						},
-						{
-							title: 'Gulliver\'s Travels',
-							type: 'Novella'
-						},
-						{
-							title: 'Up, Down and Under',
-							type: 'Poem'
-						}
-					];
-					this.$set('items', exampleItems);
+					this.$http.get('/api/items', function (data, status, request) {
+						this.$set('items', data);
+					}).error(function (data, status, request) {
+						// handle error
+					});
 				},
 				addItem: function (e) {
 					e.preventDefault();
 					if (this.item.title) {
-						this.items.push(this.item);
-						this.item = { title: '', type: '', system: '' };
+						this.$http.post('/api/items', this.item, function (data, status, request) {
+							this.items.push(JSON.stringify(data));
+							this.item = { title: '', type: '', system: '' };
+						}).error(function (data, status, request) {
+							// handle error
+						});
 					}
 				},
 				removeItem: function (e, item) {
 					e.preventDefault();
 					if (confirm('Are you sure you want to remove this item?')) {
-						this.items.$remove(item);
+						this.$http.delete('/api/items/' + item._id, function (data, status, request) {
+							this.items.$remove(item);
+						}).error(function (data, status, request) {
+							// handle error
+						});
 					}
 				},
 				toggleView: function (e) {

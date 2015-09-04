@@ -54,7 +54,11 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-repeat="item in items | filterBy search.title in 'title' | filterBy search.type in 'type'">
+							<tr
+								v-repeat="item in items | filterBy search.title in 'title' | filterBy search.type in 'type'"
+								v-transition="fade"
+								stagger="100"
+							>
 								<td>{{item.title}}</td>
 								<td>{{item.type}}</td>
 								<td>{{item.system}}</td>

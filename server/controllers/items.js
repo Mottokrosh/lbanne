@@ -17,7 +17,7 @@ exports.createItem = function (req, res) {
 	});
 
 	item.save(function (err) {
-		if (err) res.send(err);
+		if (err) return res.send(err);
 
 		res.status(201).json(item);
 	});
@@ -26,7 +26,7 @@ exports.createItem = function (req, res) {
 // GET /api/items
 exports.getItems = function (req, res) {
 	Item.find(function (err, items) {
-		if (err) res.send(err);
+		if (err) return res.send(err);
 
 		res.json(items);
 	});
@@ -35,7 +35,11 @@ exports.getItems = function (req, res) {
 // GET /api/items/:id
 exports.getItem = function (req, res) {
 	Item.findById(req.params.id, function (err, item) {
-		if (err) res.send(err);
+		if (err) {
+			return err.kind === 'ObjectId' ?
+				  res.status(404).send({ message: 'Invalid item ID.' })
+				: res.status(500).send(err);
+		}
 
 		if (!item) {
 			return res.status(404).json({ message: 'Item not found.' });
@@ -48,7 +52,11 @@ exports.getItem = function (req, res) {
 // PUT /api/items/:id
 exports.updateItem = function (req, res) {
 	Item.findByIdAndUpdate(req.params.id, req.body, { new: true }, function (err, item) {
-		if (err) res.send(err);
+		if (err) {
+			return err.kind === 'ObjectId' ?
+				  res.status(404).send({ message: 'Invalid item ID.' })
+				: res.status(500).send(err);
+		}
 
 		if (!item) {
 			return res.status(404).json({ message: 'Item not found.' });
@@ -61,7 +69,11 @@ exports.updateItem = function (req, res) {
 // DELETE /api/items/:id
 exports.deleteItem = function (req, res) {
 	Item.findByIdAndRemove(req.params.id, function (err, item) {
-		if (err) res.send(err);
+		if (err) {
+			return err.kind === 'ObjectId' ?
+				  res.status(404).send({ message: 'Invalid item ID.' })
+				: res.status(500).send(err);
+		}
 
 		if (!item) {
 			return res.status(404).json({ message: 'Item not found.' });
