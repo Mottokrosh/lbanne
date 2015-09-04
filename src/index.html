@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="format-detection" content="telephone=no">
+		<meta name="msapplication-tap-highlight" content="no">
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+		<link rel="stylesheet" type="text/css" href="css/app.css">
+		<title>Lye Brary Anne</title>
+	</head>
+	<body>
+		<div id="lbanne">
+			<header>
+				<h1>Lye Brary Anne</h1>
+				<nav>
+					<ul>
+						<li><a href="#/login" v-on="click: goTo('login')">Login</a></li>
+						<li><a href="#/add" v-on="click: goTo('add')">Add Item</a></li>
+						<li><a href="#/listing" v-on="click: goTo('listing')">Listing</a></li>
+					</ul>
+				</nav>
+			</header>
+			<main>
+				<section>
+					<component is="{{currentView}}" v-transition="fade" transition-mode="out-in"></component>
+				</section>
+			</main>
+		</div>
+		<script type="text/javascript" src="cordova.js"></script>
+		<script type="text/javascript" src="js/bundle.js"></script>
+	</body>
+</html>
