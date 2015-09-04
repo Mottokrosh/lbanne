@@ -83,3 +83,13 @@ exports.deleteItem = function (req, res) {
 	});
 };
 
+// GET /api/systems
+exports.getSystems = function (req, res) {
+	Item.find().distinct('system', function (err, systems) {
+		if (err) return res.status(500).json(err);
+		if (!systems) return res.send(404).json({ message: 'No systems found.' });
+		res.json(systems);
+	});
+};
+
+

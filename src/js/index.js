@@ -9,13 +9,6 @@ var app = {
 	// Application Constructor
 	//
 	initialize: function () {
-		this.bindEvents();
-	},
-
-	//
-	// Bind Event Listeners
-	//
-	bindEvents: function () {
 		if (this.insideWebView) {
 			document.addEventListener('deviceready', this.onDeviceReady, false);
 		} else {
@@ -34,13 +27,16 @@ var app = {
 				item: { title: '', type: '', system: '' },
 				items: [],
 				types: ['Adventure', 'Campaign Setting', 'Rulebook'],
+				systems: [],
 				search: {
 					title: '',
-					type: ''
+					type: '',
+					system: ''
 				},
 				currentView: 'test1'
 			},
 			ready: function () {
+				this.fetchSystems();
 				this.fetchItems();
 			},
 			components: {
@@ -58,6 +54,13 @@ var app = {
 				}
 			},
 			methods: {
+				fetchSystems: function () {
+					this.$http.get('/api/systems', function (data, status, request) {
+						this.$set('systems', data);
+					}).error(function (data, status, request) {
+						// handle error
+					});
+				},
 				fetchItems: function () {
 					this.$http.get('/api/items', function (data, status, request) {
 						this.$set('items', data);

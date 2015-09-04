@@ -48,14 +48,18 @@
 							</tr>
 							<tr>
 								<th><input type="text" v-model="search.title" placeholder="Search Titles"></th>
-								<th><select id="item-type" v-model="search.type" options="types"><option value="">Filter by type...</option></select></th>
-								<th></th>
+								<th>
+									<select id="item-type" v-model="search.type" options="types"><option value="">Filter by type...</option></select>
+								</th>
+								<th>
+									<select id="item-system" v-model="search.system" options="systems"><option value="">Filter by system...</option></select>
+								</th>
 								<th></th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr
-								v-repeat="item in items | filterBy search.title in 'title' | filterBy search.type in 'type'"
+								v-repeat="item in items | filterBy search.title in 'title' | filterBy search.type in 'type' | filterBy search.system in 'system'"
 								v-transition="fade"
 								stagger="100"
 							>
