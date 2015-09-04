@@ -1,0 +1,23 @@
+<div>
+	<h2>Add Item</h2>
+	<form>
+		<div>
+			<label for="item-title">Title</label>
+			<input id="item-title" type="text" v-model="item.title">
+		</div>
+		<div>
+			<label for="item-type">Type</label>
+			<select id="item-type" v-model="item.type" options="types">
+				<option value="">Choose a type...</option>
+			</select>
+		</div>
+		<div>
+			<label for="item-system">System</label>
+			<input id="item-system" type="text" v-model="item.system">
+		</div>
+		<div>
+			<button type="submit" v-on="click: addItem">Add Item</button>
+		</div>
+		<!-- <pre>{{item | json 2}}</pre> -->
+	</form>
+</div>

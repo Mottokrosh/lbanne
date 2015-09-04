@@ -22,8 +22,12 @@ body {
 
 header {
 	background-color: $dark;
-	padding: 1rem 1rem 1px 1rem;
+	padding: 0;
 	text-align: center;
+
+	h1 {
+		padding: 1rem 1rem 1px 1rem;
+	}
 }
 
 section {
@@ -146,4 +150,36 @@ button, [type="submit"] {
 	opacity: 0;
 }
 
+nav {
+	ul {
+		margin: 0 0 1rem 0;
+		padding: 0;
+		list-style: none;
+		display: flex;
 
+		li {
+			flex: 1;
+			display: flex;
+
+			a {
+				flex: 1;
+				display: flex;
+				background-color: $action;
+				color: $lightest;
+				justify-content: center;
+				padding: 0.5rem;
+				text-decoration: none;
+
+				&:hover {
+					background-color: $action2;
+					color: $lightest;
+				}
+
+				&:active {
+					background-color: $action3;
+					color: $dark;
+				}
+			}
+		}
+	}
+}

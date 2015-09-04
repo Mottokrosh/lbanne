@@ -1,3 +1,3 @@
 module.exports = {
-	template: require('../templates/login.html')
+	template: require('../../templates/login.html')
 };

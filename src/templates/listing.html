@@ -1,0 +1,35 @@
+<div>
+	<h2>Listing</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Title</th>
+				<th>Type</th>
+				<th>System</th>
+				<th>Actions</th>
+			</tr>
+			<tr>
+				<th><input type="text" v-model="search.title" placeholder="Search Titles"></th>
+				<th>
+					<select id="item-type" v-model="search.type" options="types"><option value="">Filter by type...</option></select>
+				</th>
+				<th>
+					<select id="item-system" v-model="search.system" options="systems"><option value="">Filter by system...</option></select>
+				</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr
+				v-repeat="item in items | filterBy search.title in 'title' | filterBy search.type in 'type' | filterBy search.system in 'system'"
+				v-transition="fade"
+				stagger="100"
+			>
+				<td>{{item.title}}</td>
+				<td>{{item.type}}</td>
+				<td>{{item.system}}</td>
+				<td><button v-on="click: removeItem($event, item)">Delete</button></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
