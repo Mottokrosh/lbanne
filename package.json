@@ -27,6 +27,7 @@
     "gulp-streamify": "^1.0.0",
     "gulp-uglify": "1.1.0",
     "gulp-util": "^3.0.6",
+    "html-browserify": "0.0.6",
     "precss": "^0.3.0",
     "vinyl-source-stream": "^1.1.0",
     "vue": "^0.12.12",

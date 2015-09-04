@@ -9,6 +9,7 @@ var postcss = require('gulp-postcss');
 var plumber = require('gulp-plumber');
 var gutil = require('gulp-util');
 var imagemin = require('gulp-imagemin');
+var htmlify = require('html-browserify');
 
 // monkey-patch gulp.src to include plumber
 var gulp_src = gulp.src;
@@ -98,7 +99,7 @@ gulp.task('fonts', function () {
 gulp.task('build', ['copy', 'css', 'images', 'fonts'], function () {
 	browserify({
 		entries: [path.ENTRY_POINT_JS],
-		transform: [],
+		transform: [htmlify],
 	})
 	.bundle()
 	.pipe(source(path.DEST_JS_BUNDLE))
@@ -118,7 +119,7 @@ gulp.task('watch', ['copy', 'css', 'images', 'fonts'], function () {
 
 	var watcher = watchify(browserify({
 		entries: [path.ENTRY_POINT_JS],
-		transform: [],
+		transform: [htmlify],
 		debug: true,
 		cache: {}, packageCache: {}, fullPaths: true
 	}));

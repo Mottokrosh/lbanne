@@ -2,6 +2,8 @@ var Vue = require('vue');
 
 Vue.use(require('vue-resource'));
 
+Vue.component('login', require('./components/login.js'));
+
 var app = {
 	insideWebView: window.location.protocol === 'file:',
 
@@ -67,6 +69,10 @@ var app = {
 					}).error(function (data, status, request) {
 						// handle error
 					});
+				},
+				goTo: function (route) {
+					window.location.hash = '#/' + route;
+					this.currentView = route;
 				},
 				addItem: function (e) {
 					e.preventDefault();
