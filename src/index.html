@@ -13,9 +13,9 @@
 				<h1>Lye Brary Anne</h1>
 				<nav>
 					<ul>
-						<li><a href="#/login" v-on="click: goTo('login', $event)">Login</a></li>
-						<li><a href="#/add" v-on="click: goTo('add', $event)">Add Item</a></li>
 						<li><a href="#/listing" v-on="click: goTo('listing', $event)">Listing</a></li>
+						<li><a href="#/add" v-on="click: goTo('add', $event)">Add Item</a></li>
+						<li v-if="user.id"><a href="#/logout" v-on="click: logout">Logout</a></li>
 					</ul>
 				</nav>
 			</header>

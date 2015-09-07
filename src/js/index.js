@@ -56,6 +56,12 @@ var app = {
 				}
 			},
 			methods: {
+				logout: function (e) {
+					e.preventDefault();
+					this.$set('user', {});
+					this.deleteToken();
+					this.redirect('login');
+				},
 				goTo: function (route, e) {
 					e.preventDefault();
 					if (this.user.id) {
