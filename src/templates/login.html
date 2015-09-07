@@ -1,4 +1,28 @@
 <div>
 	<h2>Login</h2>
-	<p>Hello.</p>
+	<div class="error" v-show="errorMsg" v-transition="fade">{{errorMsg}}</div>
+	<form>
+		<div>
+			<label for="email">Email</label>
+			<input id="email" type="email" v-model="auth.email">
+		</div>
+		<div>
+			<label for="password">Password</label>
+			<input id="password" type="password" v-model="auth.password">
+		</div>
+		<p>
+			<button type="submit" v-on="click: authUser" class="full-width-button">Login</button>
+		</p>
+		<div class="button-group">
+			<div class="left">
+				<a href="javascript:void()" v-on="click: signUp">Create Account</a>
+			</div>
+			<div class="right">
+				<a href="javascript:void()" v-on="click: lostPassword">Lost Password</a>
+			</div>
+		</div>
+		<p class="alt-actions">
+			<a href="/auth/google?returnTo={{returnPath}}" class="social-auth auth-google">Login with Google</a>
+		</p>
+	</form>
 </div>
