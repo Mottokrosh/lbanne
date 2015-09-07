@@ -1,4 +1,7 @@
 var Vue = require('vue');
+var jwt_decode = require('jwt-decode');
+
+Vue.config.debug = true;
 
 Vue.use(require('vue-resource'));
 
@@ -31,14 +34,45 @@ var app = {
 				currentView: ''
 			},
 			ready: function () {
-				var self = this;
-				setTimeout(function () {
-					self.currentView = window.location.hash.replace('#/', '') || 'listing';
-				}, 0);
+				var token = this.loadToken();
+				if (token) {
+					var decodedToken = jwt_decode(token);
+					if (decodedToken) {
+						decodedToken.token = token;
+						this.$set('user', decodedToken);
+					} else {
+						// problem decoding token, likely expired
+						this.deleteToken();
+					}
+				}
+
+				if (this.user.id) {
+					var self = this;
+					setTimeout(function () {
+						self.currentView = window.location.hash.replace('#/', '') || 'listing';
+					}, 0);
+				} else {
+					this.redirect('login');
+				}
 			},
 			methods: {
-				goTo: function (route) {
-					this.currentView = route || 'listing';
+				goTo: function (route, e) {
+					e.preventDefault();
+					if (this.user.id) {
+						this.redirect(route);
+					} else {
+						this.redirect('login');
+					}
+				},
+				loadToken: function () {
+					return localStorage.getItem('jwt');
+				},
+				deleteToken: function () {
+					localStorage.removeItem('jwt');
+				},
+				redirect: function (route) {
+					window.location.hash = '#/' + route;
+					this.currentView = route;
 				}
 			}
 		});

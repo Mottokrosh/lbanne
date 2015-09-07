@@ -9,6 +9,8 @@ $action: #5c7b93;
 $action2: #7ea4b3;
 $action3: #b0d5db;
 $focus: #c38c59;
+$error_light: #cfb4a9;
+$error_dark: #9e3333;
 
 body {
 	background-image: url(../img/blurred2.jpg);
@@ -139,6 +141,10 @@ button, [type="submit"] {
 		background-color: $action3;
 		color: $dark;
 	}
+
+	&.full-width-button {
+		width: 100%;
+	}
 }
 
 .fade-transition {
@@ -183,3 +189,45 @@ nav {
 		}
 	}
 }
+
+.button-group {
+	display: flex;
+
+	.right {
+		margin-left: auto;
+	}
+}
+
+.button-secondary {
+	background-color: $dark_alt;
+	padding: 0.5rem 1rem;
+}
+
+.social-auth {
+	padding: 1rem 2rem;
+	border: none;
+	border-radius: 0.5rem;
+	font-family: 'Raleway', sans-serif;
+	font-size: 0.9rem;
+	text-transform: uppercase;
+	text-decoration: none;
+	color: #fff;
+
+	&.auth-google {
+		background-color: #c32f10;
+	}
+}
+
+.alt-actions {
+	margin-top: 2rem;
+	text-align: center;
+}
+
+.error {
+	background-color: $error_light;
+	border: 2px solid $error_dark;
+	color: $error_dark;
+	border-radius: 0.25rem;
+	padding: 1rem;
+}
+
