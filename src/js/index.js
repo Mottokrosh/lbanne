@@ -34,6 +34,7 @@ var app = {
 				currentView: ''
 			},
 			ready: function () {
+				// log us in if we have a stored token
 				var token = this.loadToken();
 				if (token) {
 					var decodedToken = jwt_decode(token);
@@ -46,29 +47,26 @@ var app = {
 					}
 				}
 
-				if (this.user.id) {
-					var self = this;
-					setTimeout(function () {
-						self.currentView = window.location.hash.replace('#/', '') || 'listing';
-					}, 0);
-				} else {
-					this.redirect('login');
-				}
+				// start listening to route changes
+				window.addEventListener('hashchange', this.hashChangeHandler, false);
+				this.hashChangeHandler();
 			},
 			methods: {
+				hashChangeHandler: function () {
+					var route = window.location.hash.replace('#/', '') || 'listing';
+					var openRoutes = ['login', 'logout', 'signup'];
+
+					if (openRoutes.indexOf(route) !== -1 || this.user.id) {
+						this.currentView = route;
+					} else {
+						window.location.hash = '#/login';
+					}
+				},
 				logout: function (e) {
 					e.preventDefault();
 					this.$set('user', {});
 					this.deleteToken();
 					this.redirect('login');
-				},
-				goTo: function (route, e) {
-					e.preventDefault();
-					if (this.user.id) {
-						this.redirect(route);
-					} else {
-						this.redirect('login');
-					}
 				},
 				loadToken: function () {
 					return localStorage.getItem('jwt');
@@ -78,7 +76,6 @@ var app = {
 				},
 				redirect: function (route) {
 					window.location.hash = '#/' + route;
-					this.currentView = route;
 				}
 			}
 		});
