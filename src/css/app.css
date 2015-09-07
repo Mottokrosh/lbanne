@@ -11,9 +11,9 @@ $action3: #b0d5db;
 $focus: #c38c59;
 
 body {
-	background-image: url(../img/blurred1.jpg);
-	background-repeat: no-repeat;
-	background-size: cover;
+	background-image: url(../img/blurred2.jpg);
+	background-repeat: repeat-y;
+	background-size: 100%;
 	background-position: center center;
 	font-size: 18px;
 	font-family: 'Bitter', serif;

@@ -37,9 +37,6 @@ var app = {
 				}, 0);
 			},
 			methods: {
-				getRoute: function () {
-					return window.location.hash.replace('#/', '');
-				},
 				goTo: function (route) {
 					this.currentView = route || 'listing';
 				}
