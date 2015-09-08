@@ -1,4 +1,9 @@
 // ============================
+// load env vars from file ====
+// ============================
+require('dotenv').load();
+
+// ============================
 // get the packages we need ===
 // ============================
 var express = require('express');
