@@ -73,7 +73,7 @@ exports.updateItem = function (req, res) {
 
 // DELETE /api/items/:id
 exports.deleteItem = function (req, res) {
-	Item.findByIdAndRemove(req.params.id, function (err, item) {
+	Item.findOneAndRemove({ _id: req.params.id, userId: req.user.id }, function (err, item) {
 		if (err) {
 			return err.kind === 'ObjectId' ?
 				  res.status(404).send({ message: 'Invalid item ID.' })
