@@ -46,6 +46,10 @@ exports.getItem = function (req, res) {
 			return res.status(404).json({ message: 'Item not found.' });
 		}
 
+		if (item.userId !== req.user.id) {
+			return res.status(403).json({ message: 'Not authorised to view this item.' });
+		}
+
 		res.json(item);
 	});
 };
