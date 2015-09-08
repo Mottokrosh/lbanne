@@ -29,7 +29,7 @@ module.exports = {
 				this.user = jwt_decode(data.token);
 				this.user.token = data.token;
 				this.saveToken(data.token);
-				this.redirect('listing');
+				this.redirect(this.homeView);
 			}).error(function (data, status, request) {
 				// handle error
 				this.errorMsg = data.message;
@@ -44,7 +44,7 @@ module.exports = {
 			e.preventDefault();
 		},
 		redirect: function (route) {
-			window.location.hash = '#/' + route;
+			window.location.href = window.location.pathname + '#/' + route;
 		},
 		saveToken: function (token) {
 			localStorage.setItem('jwt', token);

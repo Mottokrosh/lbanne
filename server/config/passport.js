@@ -12,17 +12,11 @@ var User = require('../models/user');
 //
 
 passport.use(new GoogleStrategy(config.socialAuth.google, function (req, accessToken, refreshToken, profile, done) {
-	var userTokenData, returnTo;
+	var userTokenData;
 
 	if (req.session) {
 		// see if we have a JWT in the session
 		userTokenData = User.decodeToken(req.session.jwt);
-
-		// look for a return URL (used by web apps)
-		returnTo = req.session.returnTo;
-
-		// destroy the session
-		req.session.destroy();
 	}
 
 	if (userTokenData) {

@@ -1,5 +1,6 @@
 var Vue = require('vue');
 var jwt_decode = require('jwt-decode');
+var queryString = require('query-string');
 
 Vue.config.debug = true;
 
@@ -31,16 +32,28 @@ var app = {
 			el: '#lbanne',
 			data: {
 				user: {},
-				currentView: ''
+				currentView: '',
+				homeView: 'listing'
 			},
 			ready: function () {
+				// look for a token query string parameter
+				// (such as from a successful social auth redirect)
+				if (window.location.search) {
+					var parsed = queryString.parse(window.location.search);
+					if (parsed.token) {
+						// save token locally and redirect (to lose the query string)
+						// (we're not bothering to validate the token, that'll happen below)
+						this.saveToken(parsed.token);
+						this.redirect(this.homeView);
+					}
+				}
+
 				// log us in if we have a stored token
 				var token = this.loadToken();
 				if (token) {
-					var decodedToken = jwt_decode(token);
-					if (decodedToken) {
-						decodedToken.token = token;
-						this.$set('user', decodedToken);
+					var user = this.userFromToken(token);
+					if (user) {
+						this.$set('user', user);
 					} else {
 						// problem decoding token, likely expired
 						this.deleteToken();
@@ -53,7 +66,7 @@ var app = {
 			},
 			methods: {
 				hashChangeHandler: function () {
-					var route = window.location.hash.replace('#/', '') || 'listing';
+					var route = window.location.hash.replace('#/', '') || this.homeView;
 					var openRoutes = ['login', 'logout', 'signup'];
 
 					if (openRoutes.indexOf(route) !== -1 || this.user.id) {
@@ -61,6 +74,18 @@ var app = {
 					} else {
 						window.location.hash = '#/login';
 					}
+				},
+				userFromToken: function (encodedToken) {
+					var user = null;
+					try {
+						user = jwt_decode(encodedToken);
+					} catch (e) {
+						console.log(e);
+					}
+					if (user) {
+						user.token = encodedToken;
+					}
+					return user;
 				},
 				logout: function (e) {
 					e.preventDefault();
@@ -71,11 +96,14 @@ var app = {
 				loadToken: function () {
 					return localStorage.getItem('jwt');
 				},
+				saveToken: function (token) {
+					localStorage.setItem('jwt', token);
+				},
 				deleteToken: function () {
 					localStorage.removeItem('jwt');
 				},
 				redirect: function (route) {
-					window.location.hash = '#/' + route;
+					window.location.href = window.location.pathname + '#/' + route;
 				}
 			}
 		});

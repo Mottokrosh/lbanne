@@ -32,6 +32,7 @@
     "nodemon": "^1.4.1",
     "parallelshell": "^2.0.0",
     "precss": "^0.3.0",
+    "query-string": "^2.4.1",
     "vinyl-source-stream": "^1.1.0",
     "vue": "^0.12.12",
     "vue-resource": "^0.1.15",

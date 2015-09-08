@@ -43,7 +43,7 @@ app.use(passport.initialize());
 
 // basic route
 app.get('/', function (req, res) {
-	res.send('Hello! The API is at http://localhost:' + port + '/api');
+	res.send('Hello! The app is at http://localhost:' + port + '/app, and the API is at http://localhost:' + port + '/api');
 });
 
 // CLIENT ROUTES ----------------
@@ -78,7 +78,7 @@ app.get('/auth/google', function (req, res, next) {
 	if (token) {
 		req.session.jwt = req.query.token;
 	}
-	req.session.returnTo = req.query.return_to;
+	req.session.returnTo = req.query.returnTo;
 	next();
 }, passport.authenticate('google', { scope: 'profile email', session: false }));
 
@@ -87,7 +87,12 @@ app.get('/auth/google/callback', passport.authenticate('google', { session: fals
 	if (req.user.error) {
 		res.redirect('/auth/result?error=' + req.user.error);
 	} else {
-		res.redirect('/auth/result?token=' + req.user.generateToken());
+		if (req.session.returnTo) {
+			res.redirect(req.session.returnTo + '?token=' + req.user.generateToken());
+		} else {
+			res.redirect('/auth/result?token=' + req.user.generateToken());
+		}
+		req.session.destroy();
 	}
 });
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'user_location'] }));
