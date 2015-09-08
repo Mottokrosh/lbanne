@@ -56,7 +56,7 @@ exports.getItem = function (req, res) {
 
 // PUT /api/items/:id
 exports.updateItem = function (req, res) {
-	Item.findByIdAndUpdate(req.params.id, req.body, { new: true }, function (err, item) {
+	Item.findOneAndUpdate({ _id: req.params.id, userId: req.user.id }, req.body, { new: true }, function (err, item) {
 		if (err) {
 			return err.kind === 'ObjectId' ?
 				  res.status(404).send({ message: 'Invalid item ID.' })
@@ -90,7 +90,7 @@ exports.deleteItem = function (req, res) {
 
 // GET /api/systems
 exports.getSystems = function (req, res) {
-	Item.find().distinct('system', function (err, systems) {
+	Item.find({ userId: req.user.id }).distinct('system', function (err, systems) {
 		if (err) return res.status(500).json(err);
 		if (!systems) return res.send(404).json({ message: 'No systems found.' });
 		res.json(systems);
