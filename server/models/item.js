@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var config = require('../config/config');
 
 var ItemSchema = new mongoose.Schema({
+	userId: { type: String, required: true },
 	title: { type: String, required: true, trim: true },
 	library: { type: String, trim: true },
 	type: { type: String, trim: true },

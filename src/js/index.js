@@ -54,6 +54,7 @@ var app = {
 					var user = this.userFromToken(token);
 					if (user) {
 						this.$set('user', user);
+						Vue.http.headers.common.Authorization = 'Bearer ' + user.token;
 					} else {
 						// problem decoding token, likely expired
 						this.deleteToken();
@@ -90,6 +91,7 @@ var app = {
 				logout: function (e) {
 					e.preventDefault();
 					this.$set('user', {});
+					Vue.http.headers.common.Authorization = undefined;
 					this.deleteToken();
 					this.redirect('login');
 				},

@@ -111,12 +111,12 @@ app.get('/auth/twitter/callback', passport.authenticate('twitter'), function (re
 // API ROUTES -------------------
 
 // We are going to protect /api routes with JWT
-/*app.use('/api', expressJwt({
+app.use('/api', expressJwt({
 	secret: config.secret,
-	isRevoked: userController.isRevokedToken,
+	isRevoked: userController.isRevokedToken/*,
 	issuer: config.jwtIssuer,
-	audience: config.jwtAudience
-}));*/
+	audience: config.jwtAudience*/
+}));
 
 // get an instance of the router for api routes
 var apiRoutes = express.Router();

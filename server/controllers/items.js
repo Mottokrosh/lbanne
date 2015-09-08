@@ -5,6 +5,7 @@ var config = require('../config/config');
 // POST /api/items
 exports.createItem = function (req, res) {
 	var item = new Item({
+		userId: req.user.id,
 		title: req.body.title,
 		library: req.body.library || 'Default',
 		type: req.body.type,
@@ -25,7 +26,7 @@ exports.createItem = function (req, res) {
 
 // GET /api/items
 exports.getItems = function (req, res) {
-	Item.find(function (err, items) {
+	Item.find({ userId: req.user.id }, function (err, items) {
 		if (err) return res.send(err);
 
 		res.json(items);

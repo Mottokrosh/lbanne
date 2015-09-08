@@ -28,6 +28,7 @@ module.exports = {
 				this.errorMsg = '';
 				this.user = jwt_decode(data.token);
 				this.user.token = data.token;
+				this.$http.headers.common.Authorization = 'Bearer ' + data.token;
 				this.saveToken(data.token);
 				this.redirect(this.homeView);
 			}).error(function (data, status, request) {
