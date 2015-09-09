@@ -1,5 +1,7 @@
 <div>
 	<h2>Add Item</h2>
+	<div aria-live="polite" role="status" class="notice" v-show="notice"></div>
+	<div aria-live="assertive" role="alert" class="error" v-show="error"></div>
 	<form>
 		<div>
 			<label for="item-title">Title</label>
@@ -12,12 +14,33 @@
 			</select>
 		</div>
 		<div>
+			<label for="item-format">Format</label>
+			<select id="item-format" v-model="item.format" options="formats">
+				<option value="">Choose a format...</option>
+			</select>
+		</div>
+		<div>
 			<label for="item-system">System</label>
 			<input id="item-system" type="text" v-model="item.system">
 		</div>
 		<div>
+			<label for="item-start-level">Starting Level</label>
+			<input id="item-start-level" type="number" min="0" max="64" v-model="item.startLevel">
+		</div>
+		<div>
+			<label for="item-end-level">Ending Level</label>
+			<input id="item-end-level" type="number" min="0" max="64" v-model="item.endLevel">
+		</div>
+		<div>
+			<label for="item-author">Author</label>
+			<input id="item-author" type="text" v-model="item.author">
+		</div>
+		<div>
+			<label for="item-publisher">Publisher</label>
+			<input id="item-publisher" type="text" v-model="item.publisher">
+		</div>
+		<div>
 			<button type="submit" v-on="click: addItem">Add Item</button>
 		</div>
-		<!-- <pre>{{item | json 2}}</pre> -->
 	</form>
 </div>

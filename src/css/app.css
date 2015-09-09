@@ -47,6 +47,10 @@ header {
 		padding: 3rem 1rem 2rem 1rem;
 		color: $lightest;
 		text-shadow: 1px 1px 0.25rem $dark_trans;
+
+		img {
+			max-width: 12rem;
+		}
 	}
 
 	nav {

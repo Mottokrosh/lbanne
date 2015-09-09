@@ -7,8 +7,9 @@ var ItemSchema = new mongoose.Schema({
 	library: { type: String, trim: true },
 	type: { type: String, trim: true },
 	system: { type: String, trim: true },
-	startLevel: { type: Number, min: 1, max: 20 },
-	endLevel: { type: Number, min: 1, max: 20 },
+	format: { type: String, trim: true },
+	startLevel: { type: Number, min: 0, max: 64 },
+	endLevel: { type: Number, min: 0, max: 64 },
 	author: { type: String, trim: true },
 	publisher: { type: String, trim: true },
 	tags: [{ type: String, lowercase: true, trim: true }]
