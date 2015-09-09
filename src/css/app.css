@@ -1,8 +1,9 @@
 @import url(https://fonts.googleapis.com/css?family=Bitter|Raleway);
 @import 'partials/reset.css';
 
-$dark: #3a2a23;
+$dark: rgba(58, 42, 35, 1);
 $dark_alt: #976f4b;
+$dark_trans: rgba(58, 42, 35, 0.5);
 $light: rgba(240, 241, 232, 0.75);
 $lightest: rgba(255, 255, 255, 0.9);
 $action: #5c7b93;
@@ -13,31 +14,46 @@ $error_light: #cfb4a9;
 $error_dark: #9e3333;
 
 body {
-	background-image: url(../img/blurred2.jpg);
+	background-image: url(../img/blurred1.jpg);
 	background-repeat: repeat-y;
 	background-size: 100%;
-	background-position: center center;
+	background-position: top center;
+	background-attachment: fixed;
 	font-size: 18px;
 	font-family: 'Bitter', serif;
 	color: $dark;
 }
 
+#lbanne {
+	margin: 0;
+}
+
+main {
+	background-color: $light;
+	padding-bottom: 2rem;
+
+	& > div {
+		margin: 0 auto;
+		padding: 2rem;
+		max-width: 960px;
+	}
+}
+
 header {
-	background-color: $dark;
 	padding: 0;
 	text-align: center;
 
 	h1 {
-		padding: 1rem 1rem 1px 1rem;
+		padding: 3rem 1rem 2rem 1rem;
+		color: $lightest;
+		text-shadow: 1px 1px 0.25rem $dark_trans;
 	}
-}
 
-section {
-	margin: 2rem auto;
-	padding: 2rem;
-	background-color: $light;
-	max-width: 960px;
-	border-radius: 0.5rem;
+	nav {
+		ul {
+			margin: 0;
+		}
+	}
 }
 
 h1, h2, h3, h4 {
@@ -111,7 +127,7 @@ label {
 input, select {
 	font-family: 'Bitter', serif;
 	font-size: 1rem;
-	background: url(../img/blurred1.jpg) top left no-repeat;
+	background-color: $dark_trans;
 	padding: 1rem;
 	height: 3rem;
 	border: none;
@@ -215,6 +231,10 @@ nav {
 
 	&.auth-google {
 		background-color: #c32f10;
+
+		&:hover {
+			color: $lightest;
+		}
 	}
 }
 
