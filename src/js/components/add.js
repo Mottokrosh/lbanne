@@ -36,9 +36,19 @@ module.exports = {
 						author: '',
 						publisher: ''
 					});
+					this.notice = data.title + ' added.';
+					document.querySelectorAll('#item-title')[0].focus();
 				}).error(function (data, status, request) {
 					// handle error
 				});
+			}
+		},
+		close: function (target, e) {
+			e.preventDefault();
+			if (target === 'notice') {
+				this.notice = '';
+			} else {
+				this.error = '';
 			}
 		}
 	}

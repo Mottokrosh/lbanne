@@ -12,6 +12,8 @@ $action3: #b0d5db;
 $focus: #c38c59;
 $error_light: #cfb4a9;
 $error_dark: #9e3333;
+$notice_light: #b7bdab;
+$notice_dark: #4c5a31;
 
 body {
 	background-image: url(../img/blurred1.jpg);
@@ -247,11 +249,43 @@ nav {
 	text-align: center;
 }
 
+.error, .notice {
+	border-radius: 0.25rem;
+	padding: 1rem 2rem 1rem 1rem;
+	position: relative;
+
+	& > button {
+		background-color: transparent;
+		padding: 0;
+		font-size: 2rem;
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
+		line-height: 0.5;
+	}
+
+	p:last-of-type {
+		margin-bottom: 0;
+	}
+}
+
 .error {
 	background-color: $error_light;
 	border: 2px solid $error_dark;
 	color: $error_dark;
-	border-radius: 0.25rem;
-	padding: 1rem;
+
+	& > button {
+		color: $error_dark;
+	}
+}
+
+.notice {
+	background-color: $notice_light;
+	border: 2px solid $notice_dark;
+	color: $notice_dark;
+
+	& > button {
+		color: $notice_dark;
+	}
 }
 
