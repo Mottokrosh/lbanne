@@ -8,11 +8,17 @@ module.exports = {
 			systems: [],
 			types: config.types,
 			formats: config.formats,
+			levels: {
+				start: config.levels.limits.start,
+				end: config.levels.limits.end
+			},
 			search: {
 				title: '',
 				type: '',
 				system: '',
-				format: ''
+				format: '',
+				startLevel: null,
+				endLevel: null
 			}
 		};
 	},

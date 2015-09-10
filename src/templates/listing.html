@@ -22,14 +22,18 @@
 				<th>
 					<select id="item-format" v-model="search.format" options="formats"><option value="">Filter by format...</option></select>
 				</th>
-				<th></th>
-				<th></th>
+				<th>
+					<input type="number" v-model="search.startLevel" min="levels.start" max="levels.end">
+				</th>
+				<th>
+					<input type="number" v-model="search.endLevel" min="levels.start" max="levels.end">
+				</th>
 				<th></th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr
-				v-repeat="item in items | filterBy search.title in 'title' | filterBy search.type in 'type' | filterBy search.system in 'system'"
+				v-repeat="item in items | filterBy search.title in 'title' | filterBy search.type in 'type' | filterBy search.system in 'system' | filterBy search.startLevel in 'startLevel' | filterBy search.endLevel in 'endLevel'"
 				v-transition="fade"
 				stagger="100"
 			>
