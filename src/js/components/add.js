@@ -1,3 +1,5 @@
+var config = require('../config.js');
+
 module.exports = {
 	template: require('../../templates/add.html'),
 	data: function () {
@@ -7,13 +9,13 @@ module.exports = {
 				type: '',
 				system: '',
 				format: '',
-				startLevel: 1,
-				endLevel: 20,
+				startLevel: config.levels.default.start,
+				endLevel: config.levels.default.end,
 				author: '',
 				publisher: ''
 			},
-			types: ['Adventure', 'Campaign Setting', 'Rulebook'],
-			formats: ['Physical', 'Digital (PDF)', 'Physical & Digital', 'Digital (Other)', 'Other'],
+			types: config.types,
+			formats: config.formats,
 			notice: '',
 			error: ''
 		};
@@ -31,8 +33,8 @@ module.exports = {
 						type: '',
 						system: '',
 						format: '',
-						startLevel: 1,
-						endLevel: 20,
+						startLevel: config.levels.default.start,
+						endLevel: config.levels.default.end,
 						author: '',
 						publisher: ''
 					});

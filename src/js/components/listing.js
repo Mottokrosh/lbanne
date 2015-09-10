@@ -1,11 +1,13 @@
+var config = require('../config.js');
+
 module.exports = {
 	template: require('../../templates/listing.html'),
 	data: function () {
 		return {
 			items: [],
 			systems: [],
-			types: ['Adventure', 'Campaign Setting', 'Rulebook'],
-			formats: ['Physical', 'Digital (PDF)', 'Physical & Digital', 'Digital (Other)', 'Other'],
+			types: config.types,
+			formats: config.formats,
 			search: {
 				title: '',
 				type: '',

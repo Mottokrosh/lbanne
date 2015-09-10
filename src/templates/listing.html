@@ -7,6 +7,8 @@
 				<th>Type</th>
 				<th>System</th>
 				<th>Format</th>
+				<th>Start Level</th>
+				<th>End Level</th>
 				<th>Actions</th>
 			</tr>
 			<tr>
@@ -21,6 +23,8 @@
 					<select id="item-format" v-model="search.format" options="formats"><option value="">Filter by format...</option></select>
 				</th>
 				<th></th>
+				<th></th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -33,6 +37,8 @@
 				<td>{{item.type}}</td>
 				<td>{{item.system}}</td>
 				<td>{{item.format}}</td>
+				<td>{{item.startLevel}}</td>
+				<td>{{item.endLevel}}</td>
 				<td><button v-on="click: removeItem($event, item)">Delete</button></td>
 			</tr>
 		</tbody>
