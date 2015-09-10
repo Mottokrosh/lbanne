@@ -22,7 +22,7 @@ module.exports = {
 				this.error = 'You must specify an email address.';
 				return;
 			}
-			if (!this.account.password || this.account.password < 8) {
+			if (this.account.password.length < 8) {
 				this.error = 'You must specify a password of at least 8 characters.';
 				return;
 			}
@@ -35,7 +35,7 @@ module.exports = {
 				this.redirect(this.homeView);
 			}).error(function (data, status, request) {
 				// handle error
-				this.error = data.message;
+				this.error = data.message || 'A server error occurred.';
 				this.account.email = '';
 				this.account.password = '';
 			});

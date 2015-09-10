@@ -12,7 +12,13 @@ exports.postUser = function (req, res) {
 	});
 
 	user.save(function (err) {
-		if (err) return res.status(500).send(err);
+		if (err) {
+			if (err.code === 11000) {
+				return res.status(409).json({ success: false, message: 'This email address already has an account.' });
+			} else {
+				return res.status(500).json(err);
+			}
+		}
 
 		res.status(201).json({
 			success: true,
@@ -24,11 +30,6 @@ exports.postUser = function (req, res) {
 
 // GET /user
 exports.getUsers = function (req, res) {
-	/*User.find(function (err, users) {
-		if (err) res.send(err);
-
-		res.json(users);
-	});*/
 	res.send(403).json();
 };
 
