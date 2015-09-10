@@ -13,7 +13,7 @@ module.exports = {
 				publisher: ''
 			},
 			types: ['Adventure', 'Campaign Setting', 'Rulebook'],
-			formats: ['Physical', 'Digital (PDF)', 'Digital (Other)', 'Other'],
+			formats: ['Physical', 'Digital (PDF)', 'Physical & Digital', 'Digital (Other)', 'Other'],
 			notice: '',
 			error: ''
 		};

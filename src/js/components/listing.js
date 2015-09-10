@@ -5,10 +5,12 @@ module.exports = {
 			items: [],
 			systems: [],
 			types: ['Adventure', 'Campaign Setting', 'Rulebook'],
+			formats: ['Physical', 'Digital (PDF)', 'Physical & Digital', 'Digital (Other)', 'Other'],
 			search: {
 				title: '',
 				type: '',
-				system: ''
+				system: '',
+				format: ''
 			}
 		};
 	},

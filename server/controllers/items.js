@@ -10,6 +10,7 @@ exports.createItem = function (req, res) {
 		library: req.body.library || 'Default',
 		type: req.body.type,
 		system: req.body.system,
+		format: req.body.format,
 		startLevel: parseInt(req.body.startLevel, 10) || undefined,
 		endLevel: parseInt(req.body.endLevel, 10) || undefined,
 		author: req.body.author,
