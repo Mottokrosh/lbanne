@@ -40,6 +40,7 @@ module.exports = {
 					document.querySelectorAll('#item-title')[0].focus();
 				}).error(function (data, status, request) {
 					// handle error
+					this.error = data.message || 'A server error occurred.';
 				});
 			}
 		},
