@@ -10,5 +10,10 @@ module.exports = {
 			start: 0,
 			end: 64,
 		}
+	},
+	helpers: {
+		redirect: function (route) {
+			window.location.href = window.location.pathname + '#/' + route;
+		}
 	}
 };

@@ -1,6 +1,7 @@
 var Vue = require('vue');
 var jwt_decode = require('jwt-decode');
 var queryString = require('query-string');
+var config = require('./config.js');
 
 Vue.config.debug = true;
 
@@ -8,6 +9,7 @@ Vue.use(require('vue-resource'));
 
 Vue.component('login', require('./components/login.js'));
 Vue.component('add', require('./components/add.js'));
+Vue.component('edit', require('./components/edit.js'));
 Vue.component('listing', require('./components/listing.js'));
 
 var app = {
@@ -33,6 +35,7 @@ var app = {
 			data: {
 				user: {},
 				currentView: '',
+				currentParams: '',
 				homeView: 'listing'
 			},
 			ready: function () {
@@ -69,9 +72,16 @@ var app = {
 				hashChangeHandler: function () {
 					var route = window.location.hash.replace('#/', '') || this.homeView;
 					var openRoutes = ['login', 'logout', 'signup'];
+					var segments;
+
+					if (route.match(/\//)) {
+						segments = route.split('/');
+						route = segments[0];
+					}
 
 					if (openRoutes.indexOf(route) !== -1 || this.user.id) {
 						this.currentView = route;
+						if (segments) { this.currentParams = segments[1]; }
 					} else {
 						window.location.hash = '#/login';
 					}
@@ -104,9 +114,7 @@ var app = {
 				deleteToken: function () {
 					localStorage.removeItem('jwt');
 				},
-				redirect: function (route) {
-					window.location.href = window.location.pathname + '#/' + route;
-				}
+				redirect: config.helpers.redirect
 			}
 		});
 	}

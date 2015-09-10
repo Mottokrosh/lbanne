@@ -1,4 +1,5 @@
 var jwt_decode = require('jwt-decode');
+var config = require('../config.js');
 
 module.exports = {
 	template: require('../../templates/login.html'),
@@ -44,9 +45,7 @@ module.exports = {
 		lostPassword: function (e) {
 			e.preventDefault();
 		},
-		redirect: function (route) {
-			window.location.href = window.location.pathname + '#/' + route;
-		},
+		redirect: config.helpers.redirect,
 		saveToken: function (token) {
 			localStorage.setItem('jwt', token);
 		}

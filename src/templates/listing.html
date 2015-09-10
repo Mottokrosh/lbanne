@@ -43,7 +43,10 @@
 				<td>{{item.format}}</td>
 				<td>{{item.startLevel}}</td>
 				<td>{{item.endLevel}}</td>
-				<td><button v-on="click: removeItem($event, item)">Delete</button></td>
+				<td class="actions">
+					<a href="#/edit/{{item._id}}" role="button">Edit</a>
+					<button v-on="click: removeItem($event, item)">Delete</button>
+				</td>
 			</tr>
 		</tbody>
 	</table>

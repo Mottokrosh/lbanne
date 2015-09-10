@@ -1,0 +1,52 @@
+<div>
+	<h2>{{mode}} Item</h2>
+	<div aria-live="polite" role="status" class="notice" v-show="notice" v-transition="fade">
+		<button v-on="click: close('notice', $event)">&times;</button>
+		<p>{{notice}}</p>
+	</div>
+	<div aria-live="assertive" role="alert" class="error" v-show="error" v-transition="fade">
+		<button v-on="click: close('error', $event)">&times;</button>
+		<p>{{error}}</p>
+	</div>
+	<form>
+		<div>
+			<label for="item-title">Title <small title="Required">*</small></label>
+			<input id="item-title" type="text" v-model="item.title" required maxlength="256">
+		</div>
+		<div>
+			<label for="item-type">Type</label>
+			<select id="item-type" v-model="item.type" options="types">
+				<option value="">Choose a type...</option>
+			</select>
+		</div>
+		<div>
+			<label for="item-format">Format</label>
+			<select id="item-format" v-model="item.format" options="formats">
+				<option value="">Choose a format...</option>
+			</select>
+		</div>
+		<div>
+			<label for="item-system">System</label>
+			<input id="item-system" type="text" v-model="item.system" maxlength="128">
+		</div>
+		<div>
+			<label for="item-start-level">Starting Level</label>
+			<input id="item-start-level" type="number" min="0" max="64" v-model="item.startLevel">
+		</div>
+		<div>
+			<label for="item-end-level">Ending Level</label>
+			<input id="item-end-level" type="number" min="0" max="64" v-model="item.endLevel">
+		</div>
+		<div>
+			<label for="item-author">Author</label>
+			<input id="item-author" type="text" v-model="item.author" maxlength="128">
+		</div>
+		<div>
+			<label for="item-publisher">Publisher</label>
+			<input id="item-publisher" type="text" v-model="item.publisher" maxlength="128">
+		</div>
+		<div>
+			<button type="submit" v-on="click: saveItem" v-attr="disabled: !item.title">Save Changes</button>
+		</div>
+	</form>
+</div>
