@@ -2,8 +2,8 @@ module.exports = {
 
 	secret: process.env.SECRET,
 	database: process.env.MONGOLAB_URI,
-	jwtAudience: 'http://localhost:8000/api',
-	jwtIssuer: 'http://localhost:8000',
+	/*jwtAudience: 'http://localhost:8000/api',
+	jwtIssuer: 'http://localhost:8000',*/
 	socialAuth: {
 		facebook: {
 			clientID: process.env.FACEBOOK_ID,

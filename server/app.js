@@ -43,7 +43,8 @@ app.use(passport.initialize());
 
 // basic route
 app.get('/', function (req, res) {
-	res.send('Hello! The app is at http://localhost:' + port + '/app, and the API is at http://localhost:' + port + '/api');
+	//res.send('Hello! The app is at http://localhost:' + port + '/app, and the API is at http://localhost:' + port + '/api');
+	res.redirect('/app');
 });
 
 // CLIENT ROUTES ----------------
@@ -121,7 +122,6 @@ app.use('/api', expressJwt({
 // get an instance of the router for api routes
 var apiRoutes = express.Router();
 
-// route to show a random message (GET http://localhost:8080/api/)
 apiRoutes.get('/', function (req, res) {
 	res.json({ message: 'Welcome to the Lye Brary Anne API.' });
 });
