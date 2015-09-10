@@ -10,8 +10,8 @@
 	</div>
 	<form>
 		<div>
-			<label for="item-title">Title</label>
-			<input id="item-title" type="text" v-model="item.title">
+			<label for="item-title">Title <small title="Required">*</small></label>
+			<input id="item-title" type="text" v-model="item.title" required maxlength="256">
 		</div>
 		<div>
 			<label for="item-type">Type</label>
@@ -27,7 +27,7 @@
 		</div>
 		<div>
 			<label for="item-system">System</label>
-			<input id="item-system" type="text" v-model="item.system">
+			<input id="item-system" type="text" v-model="item.system" maxlength="128">
 		</div>
 		<div>
 			<label for="item-start-level">Starting Level</label>
@@ -39,14 +39,14 @@
 		</div>
 		<div>
 			<label for="item-author">Author</label>
-			<input id="item-author" type="text" v-model="item.author">
+			<input id="item-author" type="text" v-model="item.author" maxlength="128">
 		</div>
 		<div>
 			<label for="item-publisher">Publisher</label>
-			<input id="item-publisher" type="text" v-model="item.publisher">
+			<input id="item-publisher" type="text" v-model="item.publisher" maxlength="128">
 		</div>
 		<div>
-			<button type="submit" v-on="click: addItem">Add Item</button>
+			<button type="submit" v-on="click: addItem" v-attr="disabled: !item.title">Add Item</button>
 		</div>
 	</form>
 </div>
