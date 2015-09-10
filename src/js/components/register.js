@@ -10,7 +10,6 @@ module.exports = {
 				password: ''
 			},
 			error: '',
-			notice: '',
 			returnPath: window.location.pathname
 		};
 	},
@@ -44,13 +43,9 @@ module.exports = {
 		saveToken: function (token) {
 			localStorage.setItem('jwt', token);
 		},
-		close: function (target, e) {
+		close: function (e) {
 			e.preventDefault();
-			if (target === 'notice') {
-				this.notice = '';
-			} else {
-				this.error = '';
-			}
+			this.error = '';
 		}
 	}
 };

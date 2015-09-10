@@ -69,6 +69,10 @@ h1, h2, h3, h4 {
 	text-transform: uppercase;
 }
 
+h2 {
+	margin-bottom: 2rem;
+}
+
 a {
 	color: $action;
 
@@ -181,6 +185,7 @@ button, [type="submit"], [role="button"] {
 
 	&.full-width-button {
 		width: 100%;
+		margin-top: 1rem;
 	}
 }
 
@@ -262,6 +267,13 @@ nav {
 .alt-actions {
 	margin-top: 2rem;
 	text-align: center;
+}
+
+.divider-for-alt {
+	text-align: center;
+	padding: 1rem 0;
+	text-transform: uppercase;
+	font-style: italic;
 }
 
 .error, .notice {

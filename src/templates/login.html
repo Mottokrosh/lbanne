@@ -1,17 +1,22 @@
 <div>
 	<h2>Login</h2>
-	<div class="error" v-show="errorMsg" v-transition="fade">{{errorMsg}}</div>
+
+	<div aria-live="assertive" role="alert" class="error" v-show="error" v-transition="fade">
+		<button v-on="click: close">&times;</button>
+		<p>{{error}}</p>
+	</div>
+
 	<form>
 		<div>
-			<label for="email">Email</label>
-			<input id="email" type="email" v-model="auth.email">
+			<label for="email">Email <small title="Required">*</small></label>
+			<input id="email" type="email" v-model="auth.email" minlength="5" maxlength="512" required>
 		</div>
 		<div>
-			<label for="password">Password</label>
-			<input id="password" type="password" v-model="auth.password">
+			<label for="password">Password <small title="Required">*</small></label>
+			<input id="password" type="password" v-model="auth.password" minlength="8" maxlength="256" required>
 		</div>
 		<p>
-			<button type="submit" v-on="click: authUser" class="full-width-button">Login</button>
+			<button type="submit" v-on="click: authUser" class="full-width-button" v-attr="disabled: !auth.email || !auth.password">Login</button>
 		</p>
 		<div class="button-group">
 			<div class="left">
@@ -21,6 +26,7 @@
 				<a href="#/lost-password">Lost Password</a>
 			</div>
 		</div>
+		<p class="divider-for-alt">&mdash; Or &mdash;</p>
 		<p class="alt-actions">
 			<a href="/auth/google?returnTo={{returnPath}}" class="social-auth auth-google">Login with Google</a>
 		</p>
