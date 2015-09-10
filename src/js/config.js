@@ -14,6 +14,15 @@ module.exports = {
 	helpers: {
 		redirect: function (route) {
 			window.location.href = window.location.pathname + '#/' + route;
+		},
+		loadToken: function () {
+			return localStorage.getItem('jwt');
+		},
+		saveToken: function (token) {
+			localStorage.setItem('jwt', token);
+		},
+		deleteToken: function () {
+			localStorage.removeItem('jwt');
 		}
 	}
 };

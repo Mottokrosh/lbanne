@@ -40,9 +40,7 @@ module.exports = {
 			});
 		},
 		redirect: config.helpers.redirect,
-		saveToken: function (token) {
-			localStorage.setItem('jwt', token);
-		},
+		saveToken: config.helpers.saveToken,
 		close: function (e) {
 			e.preventDefault();
 			this.error = '';

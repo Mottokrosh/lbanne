@@ -106,15 +106,9 @@ var app = {
 					this.deleteToken();
 					this.redirect('login');
 				},
-				loadToken: function () {
-					return localStorage.getItem('jwt');
-				},
-				saveToken: function (token) {
-					localStorage.setItem('jwt', token);
-				},
-				deleteToken: function () {
-					localStorage.removeItem('jwt');
-				},
+				loadToken: config.helpers.loadToken,
+				saveToken: config.helpers.saveToken,
+				deleteToken: config.helpers.deleteToken,
 				redirect: config.helpers.redirect
 			}
 		});
