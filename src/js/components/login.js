@@ -39,12 +39,6 @@ module.exports = {
 				this.auth.password = '';
 			});
 		},
-		signUp: function (e) {
-			e.preventDefault();
-		},
-		lostPassword: function (e) {
-			e.preventDefault();
-		},
 		redirect: config.helpers.redirect,
 		saveToken: function (token) {
 			localStorage.setItem('jwt', token);

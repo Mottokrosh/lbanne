@@ -50,7 +50,7 @@ app.get('/', function (req, res) {
 
 app.use('/app', express.static(path.join(__dirname, '../www')));
 
-// Create endpoint handlers for /users
+// Creation & authentication of users
 app.route('/user')
 	.post(userController.postUser)
 	.get(userController.getUsers);

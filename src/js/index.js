@@ -8,6 +8,7 @@ Vue.config.debug = true;
 Vue.use(require('vue-resource'));
 
 Vue.component('login', require('./components/login.js'));
+Vue.component('register', require('./components/register.js'));
 Vue.component('add', require('./components/add.js'));
 Vue.component('edit', require('./components/edit.js'));
 Vue.component('listing', require('./components/listing.js'));
@@ -71,7 +72,7 @@ var app = {
 			methods: {
 				hashChangeHandler: function () {
 					var route = window.location.hash.replace('#/', '') || this.homeView;
-					var openRoutes = ['login', 'logout', 'signup'];
+					var openRoutes = ['login', 'logout', 'register', 'lost-password'];
 					var segments;
 
 					if (route.match(/\//)) {

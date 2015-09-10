@@ -1,0 +1,29 @@
+<div>
+	<h2>Create Account</h2>
+
+	<div aria-live="polite" role="status" class="notice" v-show="notice" v-transition="fade">
+		<button v-on="click: close('notice', $event)">&times;</button>
+		<p>{{notice}}</p>
+	</div>
+	<div aria-live="assertive" role="alert" class="error" v-show="error" v-transition="fade">
+		<button v-on="click: close('error', $event)">&times;</button>
+		<p>{{error}}</p>
+	</div>
+
+	<form>
+		<div>
+			<label for="email">Email</label>
+			<input id="email" type="email" v-model="account.email">
+		</div>
+		<div>
+			<label for="password">Password</label>
+			<input id="password" type="password" v-model="account.password">
+		</div>
+		<p>
+			<button type="submit" v-on="click: createAccount" class="full-width-button">Create Account</button>
+		</p>
+		<p class="alt-actions">
+			<a href="/auth/google?returnTo={{returnPath}}" class="social-auth auth-google">Use Google Account</a>
+		</p>
+	</form>
+</div>

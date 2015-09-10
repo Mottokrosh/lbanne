@@ -4,7 +4,7 @@ var jwt = require('jsonwebtoken');
 var config = require('../config/config');
 var uuid = require('uuid');
 
-// Create endpoint /api/users for POST
+// POST /user
 exports.postUser = function (req, res) {
 	var user = new User({
 		email: req.body.email,
@@ -12,19 +12,24 @@ exports.postUser = function (req, res) {
 	});
 
 	user.save(function (err) {
-		if (err) res.send(err);
+		if (err) return res.status(500).send(err);
 
-		res.json({ message: 'New user added' }); // consider returning user object instead
+		res.status(201).json({
+			success: true,
+			message: 'New user created.',
+			token: user.generateToken()
+		});
 	});
 };
 
-// Create endpoint /api/users for GET
+// GET /user
 exports.getUsers = function (req, res) {
 	/*User.find(function (err, users) {
 		if (err) res.send(err);
 
 		res.json(users);
 	});*/
+	res.send(403).json();
 };
 
 exports.authenticateUser = function (req, res) {
