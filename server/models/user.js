@@ -17,6 +17,13 @@ var UserSchema = new mongoose.Schema({
 		type: String
 	},
 
+	verified: {
+		type: Boolean,
+		default: false
+	},
+
+	verificationToken: String,
+
 	googleID: String,
 	facebookID: String,
 	twitterID: String,

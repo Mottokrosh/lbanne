@@ -24,7 +24,7 @@ var User = require('./models/user');
 // =======================
 // configuration =========
 // =======================
-var port = process.env.PORT || 8000;
+var port = config.port;
 mongoose.connect(config.database);
 
 // use body parser so we can get info from POST and/or URL parameters
@@ -43,8 +43,7 @@ app.use(passport.initialize());
 
 // basic route
 app.get('/', function (req, res) {
-	//res.send('Hello! The app is at http://localhost:' + port + '/app, and the API is at http://localhost:' + port + '/api');
-	res.redirect('/app');
+	res.redirect(config.appPath);
 });
 
 // CLIENT ROUTES ----------------
@@ -57,6 +56,7 @@ app.route('/user')
 	.get(userController.getUsers);
 
 app.post('/user/authenticate', userController.authenticateUser);
+app.get('/user/verify/:token', userController.verifyUserEmail);
 
 // SOCIAL AUTH ROUTES -----------
 

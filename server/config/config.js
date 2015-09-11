@@ -4,6 +4,12 @@ module.exports = {
 	database: process.env.MONGOLAB_URI,
 	/*jwtAudience: 'http://localhost:8000/api',
 	jwtIssuer: 'http://localhost:8000',*/
+	port: process.env.PORT || 8000,
+	appPath: '/app',
+	mailSender: {
+		email: 'lbanne@sidhewoods.com',
+		name: 'Frank Reding'
+	},
 	socialAuth: {
 		facebook: {
 			clientID: process.env.FACEBOOK_ID,

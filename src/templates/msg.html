@@ -1,0 +1,15 @@
+<div>
+	<h2>Hello</h2>
+	<div aria-live="polite" role="status" class="notice" v-show="notice" v-transition="fade">
+		<button v-on="click: close('notice', $event)">&times;</button>
+		<p>{{notice}}</p>
+	</div>
+	<div aria-live="assertive" role="alert" class="error" v-show="error" v-transition="fade">
+		<button v-on="click: close('error', $event)">&times;</button>
+		<p>{{error}}</p>
+	</div>
+	<nav class="alt-actions">
+		<a href="#/login" role="button" v-if="!user.id">Login</a>
+		<a href="#/listing" role="button" v-if="user.id">Go to Listing</a>
+	</nav>
+</div>

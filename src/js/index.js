@@ -12,6 +12,7 @@ Vue.component('register', require('./components/register.js'));
 Vue.component('add', require('./components/add.js'));
 Vue.component('edit', require('./components/edit.js'));
 Vue.component('listing', require('./components/listing.js'));
+Vue.component('msg', require('./components/msg.js'));
 
 var app = {
 	insideWebView: window.location.protocol === 'file:',
@@ -72,7 +73,7 @@ var app = {
 			methods: {
 				hashChangeHandler: function () {
 					var route = window.location.hash.replace('#/', '') || this.homeView;
-					var openRoutes = ['login', 'logout', 'register', 'lost-password'];
+					var openRoutes = ['login', 'logout', 'register', 'lost-password', 'msg'];
 					var segments;
 
 					if (route.match(/\//)) {
