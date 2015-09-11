@@ -164,12 +164,15 @@ exports.resetPasswordConfirm = function (req, res) {
 	// the 'save' pre-hook in the model, which we need for hashing
 	// the new password
 	User.findOne(
-		{ 'passwordReset.token': req.params.token },
+		{
+			'passwordReset.token': req.params.token,
+			'passwordReset.expiry': { $gt: Date.now() }
+		},
 		function (err, user) {
 			if (err) return res.status(500).json({ message: 'A server error has occurred. '});
 			if (!user) return res.status(404).send('File not found.');
 
-			user.passwordReset = {};
+			user.passwordReset = null;
 			user.password = newPassword;
 			user.save(function (err) {
 				if (err) return res.status(500).json({ message: 'A server error has occurred. '});
