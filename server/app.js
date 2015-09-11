@@ -57,6 +57,8 @@ app.route('/user')
 
 app.post('/user/authenticate', userController.authenticateUser);
 app.get('/user/verify/:token', userController.verifyUserEmail);
+app.post('/user/reset', userController.resetPassword);
+app.get('/user/reset/:token', userController.resetPasswordConfirm);
 
 // SOCIAL AUTH ROUTES -----------
 

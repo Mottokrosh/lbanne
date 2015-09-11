@@ -1,0 +1,28 @@
+<div>
+	<h2>Lost Password</h2>
+
+	<div aria-live="polite" role="status" class="notice" v-show="notice" v-transition="fade">
+		<button v-on="click: close('notice', $event)">&times;</button>
+		<p>{{notice}}</p>
+	</div>
+	<div aria-live="assertive" role="alert" class="error" v-show="error" v-transition="fade">
+		<button v-on="click: close('error', $event)">&times;</button>
+		<p>{{error}}</p>
+	</div>
+
+	<div v-show="!finished" v-transition="fade">
+		<aside>
+			<p>If you're having trouble logging in, or can't remember your password, you may request a password reset by providing your email address below. <strong>Please note that this will not work if you signed up via a social website service such as Google. If you have forgotten your password for one of those, please retrieve via those site's password reset links.</strong></p>
+		</aside>
+
+		<form>
+			<div>
+				<label for="email">Email <small title="Required">*</small></label>
+				<input id="email" type="email" v-model="email" minlength="5" maxlength="512" required>
+			</div>
+			<p>
+				<button type="submit" v-on="click: passwordReset" class="full-width-button" v-attr="disabled: !email">Request Password Reset</button>
+			</p>
+		</form>
+	</div>
+</div>

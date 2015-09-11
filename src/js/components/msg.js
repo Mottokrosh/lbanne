@@ -14,6 +14,9 @@ module.exports = {
 			case 'verified':
 				this.notice = 'Thank you for verifying your email address.';
 				break;
+			case 'reset':
+				this.notice = 'A new password has been emailed to you. Please use it to login.';
+				break;
 			default:
 				this.error = 'No message type specified.';
 				break;

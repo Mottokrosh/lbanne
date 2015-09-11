@@ -5,9 +5,14 @@ var config = require('../config/config');
 var uuid = require('uuid');
 var postmark = require('postmark')(process.env.POSTMARK_API_TOKEN);
 var crypto = require('crypto');
+var generatePassword = require('password-generator');
 
 var sha1sum = function (input) {
 	return crypto.createHash('sha1').update(JSON.stringify(input)).digest('hex');
+};
+
+var createlink = function (req, path) {
+	return req.protocol + '://' + req.hostname + (config.port === 8000 ? ':' + 8000 : '') + path;
 };
 
 // POST /user
@@ -18,7 +23,7 @@ exports.postUser = function (req, res) {
 		verificationToken: sha1sum(uuid())
 	});
 
-	var verifLink = [req.protocol, '://', req.hostname, config.port === 8000 ? ':' + 8000 : '', '/user/verify/', user.verificationToken].join('');
+	var verifLink = createlink(req, '/user/verify/' + user.verificationToken);
 
 	user.save(function (err) {
 		if (err) {
@@ -111,6 +116,76 @@ exports.verifyUserEmail = function (req, res) {
 			if (err) return res.status(500).json({ message: 'A server error has occurred. '});
 			if (!user) return res.status(404).send('File not found.');
 			res.redirect(config.appPath + '/#/msg/verified');
+		}
+	);
+};
+
+// POST /user/reset
+exports.resetPassword = function (req, res) {
+	if (!req.body.email) {
+		return res.status(404).json({ message: 'No email specified.' });
+	}
+
+	User.findOneAndUpdate(
+		{ email: req.body.email },
+		{ passwordReset: { token: sha1sum(uuid()), expiry: Date.now() + 60*60*24 } },
+		{ new: true },
+		function (err, user) {
+			if (err) return res.status(500).json({ message: 'A server error has occurred. '});
+			if (!user) return res.status(404).json({ message: 'No account found with this email address.' });
+
+			var resetLink = createlink(req, '/user/reset/' + user.passwordReset.token);
+
+			// send reset email
+			postmark.send({
+				'From': config.mailSender.email,
+				'To': user.email,
+				'Subject': 'Password Reset Request',
+				'TextBody': 'Hello,\n\nWe have received a request to reset your password. If you would like to continue, please click the link below. If you did not request the password reset, you can safely ignore this email.\n\n{{link}}\n\nFrank.'.replace('{{link}}', resetLink),
+				'Tag': 'passwordReset'
+			}, function (error, success) {
+				if (error) return res.status(500).json({ message: 'Error sending reset email.' });
+				res.json({ message: 'Password reset email sent.' });
+			});
+		}
+	);
+};
+
+// GET /user/reset/:token
+exports.resetPasswordConfirm = function (req, res) {
+	console.log(req.params);
+	if (!req.params.token) {
+		return res.status(404).send('File not found.');
+	}
+
+	var newPassword = generatePassword();
+
+	// we can't use findOneAndUpdate here as that won't trigger
+	// the 'save' pre-hook in the model, which we need for hashing
+	// the new password
+	User.findOne(
+		{ 'passwordReset.token': req.params.token },
+		function (err, user) {
+			if (err) return res.status(500).json({ message: 'A server error has occurred. '});
+			if (!user) return res.status(404).send('File not found.');
+
+			user.passwordReset = {};
+			user.password = newPassword;
+			user.save(function (err) {
+				if (err) return res.status(500).json({ message: 'A server error has occurred. '});
+
+				// email new password
+				postmark.send({
+					'From': config.mailSender.email,
+					'To': user.email,
+					'Subject': 'New Password',
+					'TextBody': 'Hello,\n\nYour new password for Lye Brary Anne is:\n\n{{pwd}}\n\nFrank.'.replace('{{pwd}}', newPassword),
+					'Tag': 'newPassword'
+				}, function (error, success) {
+					if (error) return res.status(500).json({ message: 'Error sending new password.' });
+					res.redirect(config.appPath + '/#/msg/reset');
+				});
+			});
 		}
 	);
 };

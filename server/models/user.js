@@ -24,6 +24,11 @@ var UserSchema = new mongoose.Schema({
 
 	verificationToken: String,
 
+	passwordReset: {
+		token: String,
+		expiry: Date
+	},
+
 	googleID: String,
 	facebookID: String,
 	twitterID: String,
